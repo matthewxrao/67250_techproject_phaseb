@@ -1,0 +1,58 @@
+<head>
+  <meta name="author" content="Your name" />
+  <meta
+    name="keywords"
+    content="Museum, Carnegie Mellon University, Information Systems"
+  />
+  <meta name="description" content="MonoMuse website redesign project" />
+  <title>MonoMuse - Buy Tickets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/style.css" />
+  <script src="../static/script.js" defer></script>
+</head>
+
+<header>
+  <img id="logo" src="../static/monomuselogo.png" alt="MonoMuse Museum Logo" />
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="explore.html">Explore</a>
+    <a href="exhibitions.html">Exhibitions</a>
+    <a id="navselected" href="tickets.html">Tickets</a>
+    <a href="checkout.html">Checkout</a>
+  </nav>
+
+  <div class="main">
+    <h1>Buy Tickets</h1>
+
+    <table>
+      <tr>
+        <th>Ticket Type</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td>General</td>
+        <td>Full access to all permanent and rotating exhibitions</td>
+        <td>$25.00</td>
+      </tr>
+      <tr>
+        <td>Student</td>
+        <td>Discounted admission with a valid student ID</td>
+        <td>$15.00</td>
+      </tr>
+      <tr>
+        <td>Member</td>
+        <td>Unlimited visits, early access to new exhibitions, and exclusive events</td>
+        <td>Free</td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+<footer>
+  <p id="copyYear"></p>
+</footer>
+
+<body onload="addYear()"></body>

@@ -1,0 +1,57 @@
+<head>
+  <meta name="author" content="Your name" />
+  <meta
+    name="keywords"
+    content="Museum, Carnegie Mellon University, Information Systems"
+  />
+  <meta name="description" content="MonoMuse website redesign project" />
+  <title>MonoMuse - Exhibitions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/style.css" />
+  <script src="../static/script.js" defer></script>
+</head>
+
+<header>
+  <img id="logo" src="../static/monomuselogo.png" alt="MonoMuse Museum Logo" />
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="explore.html">Explore</a>
+    <a id="navselected" href="exhibitions.html">Exhibitions</a>
+    <a href="tickets.html">Tickets</a>
+    <a href="checkout.html">Checkout</a>
+  </nav>
+
+  <div class="main">
+    <h1>Exhibitions</h1>
+
+    <h3>Digital Horizons: Art Beyond the Screen</h3>
+    <p>
+      Step into a world where pixels meet paint. Digital Horizons showcases works by
+      emerging artists who blend traditional techniques with cutting-edge digital tools,
+      creating immersive environments that challenge our perception of reality.
+    </p>
+
+    <h3>The Machine Garden</h3>
+    <p>
+      An interactive installation where visitors walk through a living landscape of
+      kinetic sculptures and AI-generated soundscapes. The Machine Garden explores the
+      relationship between nature and technology, inviting you to plant digital seeds
+      and watch them grow in real time.
+    </p>
+
+    <h3>Echoes of Light</h3>
+    <p>
+      A mesmerizing exhibition of projection-mapped sculptures that respond to sound and
+      movement. Created by artist collective LumenLab, Echoes of Light transforms the
+      gallery into a dynamic canvas of color, shadow, and rhythm.
+    </p>
+  </div>
+</header>
+
+<footer>
+  <p id="copyYear"></p>
+</footer>
+
+<body onload="addYear()"></body>

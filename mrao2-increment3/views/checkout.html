@@ -1,0 +1,48 @@
+<head>
+  <meta name="author" content="Your name" />
+  <meta
+    name="keywords"
+    content="Museum, Carnegie Mellon University, Information Systems"
+  />
+  <meta name="description" content="MonoMuse website redesign project" />
+  <title>MonoMuse - Checkout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/style.css" />
+  <script src="../static/script.js" defer></script>
+</head>
+
+<header>
+  <img id="logo" src="../static/monomuselogo.png" alt="MonoMuse Museum Logo" />
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="explore.html">Explore</a>
+    <a href="exhibitions.html">Exhibitions</a>
+    <a href="tickets.html">Tickets</a>
+    <a id="navselected" href="checkout.html">Checkout</a>
+  </nav>
+
+  <div class="main">
+    <h1>Checkout</h1>
+
+    <form>
+      <label for="name">Name:</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <label for="quantity">Ticket Quantity:</label><br />
+      <input type="number" id="quantity" name="quantity" min="1" required /><br /><br />
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </div>
+</header>
+
+<footer>
+  <p id="copyYear"></p>
+</footer>
+
+<body onload="addYear()"></body>
