@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Roboto:wght@100;300;400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../static/style.css" />
@@ -23,22 +23,7 @@
   </head>
   <body>
     <div class="container">
-      <header class="header">
-        <img
-          id="logo"
-          src="../static/monomuselogo.png"
-          alt="MonoMuse Museum Logo"
-        />
-      </header>
-      <nav class="nav_bar">
-        <a href="../index.html">Home</a>
-        <a href="explore.html">Explore</a>
-        <a href="exhibitions.html">Exhibitions</a>
-        <a href="buytickets.html">Buy Tickets</a>
-        <a href="javascript:void(0);" class="hamburger" onclick="toggleNav()"
-          >&#9776;</a
-        >
-      </nav>
+      <div id="site-nav"></div>
       <main class="main">
         <h1>Explore</h1>
         <p>
@@ -52,6 +37,8 @@
           interactive installations to community workshops, MonoMuse is a space
           for all.
         </p>
+
+        <h2>Our Story</h2>
         <p>
           Founded in 2018, MonoMuse has grown from a small pop-up gallery into a
           landmark cultural institution. Here are some of our key milestones:
@@ -85,11 +72,9 @@
           width="600"
           height="400"
         />
-        <div>
-          <h2>Virtual Tour</h2>
-          <div class="video-container">
-            <div id="youtube-player"></div>
-          </div>
+        <h2>Virtual Tour</h2>
+        <div class="video-container">
+          <div id="youtube-player"></div>
         </div>
       </figure>
       <footer class="footer">

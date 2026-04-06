@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Your name" />
+    <meta
+      name="keywords"
+      content="Museum, Carnegie Mellon University, Information Systems"
+    />
+    <meta name="description" content="MonoMuse design rationale and data-driven redesign decisions" />
+    <title>MonoMuse - Design Rationale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Roboto:wght@100;300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="../static/script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="site-nav"></div>
+      <main class="main">
+        <h1>Design Rationale</h1>
+        <p>
+          This document explains how my website redesign directly addresses
+          the usability problems identified during Phase A analysis. Every major
+          design decision is grounded in session data, funnel metrics, and
+          observed user behavior patterns.
+        </p>
+
+        <!-- ── Problem 1 ── -->
+        <h2>1. Shortening the Funnel</h2>
+
+        <h3>The Problem</h3>
+        <p>
+          At approximately 10 steps, the museum's purchase funnel was nearly
+          double the industry benchmark of 5.1 steps. This excess length was
+          driven primarily by extensive pre-purchase browsing rather than a
+          lengthy checkout process itself. Users visited many informational
+          pages before reaching, or failing to reach, the ticket purchase flow.
+        </p>
+
+        <h3>What I Changed</h3>
+        <p>
+          I restructured the site architecture to reduce the number of pages a
+          user must navigate before reaching checkout. The home page now
+          features a prominent "Buy Tickets" call-to-action directly within the
+          hero section, allowing users to reach the purchase flow in a single
+          click from landing. The exhibitions page also includes direct
+          pathways to ticket purchase, eliminating the need to navigate back to
+          a separate tickets overview page first. By consolidating informational
+          content and surfacing the purchase entry point earlier, I reduced the
+          realistic path-to-purchase to approximately 3-4 steps: land, browse
+          one content page, click buy, and complete checkout.
+        </p>
+
+        <h3>How This Connects to the Data</h3>
+        <p>
+          With only 119 out of 1,259 sessions (9.45%) resulting in a purchase,
+          and most drop-off occurring before users ever reached checkout, the
+          data clearly indicated that users were getting lost in informational
+          browsing loops. Shortening the funnel attacks the highest-volume
+          drop-off zone directly.
+        </p>
+
+        <!-- ── Problem 2 ── -->
+        <h2>2. Making "Buy Tickets" Discoverable</h2>
+
+        <h3>The Problem</h3>
+        <p>
+          The "Buy Tickets" option was hard to find. The ticket purchase
+          call-to-action needed to be more prominent and accessible from all
+          pages, not just the tickets overview page. Users who wanted to
+          purchase had to actively seek out the correct page.
+        </p>
+
+        <h3>What I Changed</h3>
+        <p>
+          "Buy Tickets" now appears as a persistent link in the navigation bar,
+          visible on every single page of the site. On the home page, it is
+          additionally presented as a large, visually distinct button in the
+          hero section. On the exhibitions page, each exhibition description is
+          positioned near clear purchase pathways. The navigation redesign uses
+          uppercase, well-spaced typography that gives equal visual weight to
+          the ticket link alongside other navigation items, ensuring it is
+          never overlooked.
+        </p>
+
+        <h3>How This Connects to the Data</h3>
+        <p>
+          The 9.45% conversion rate with most drop-off before checkout pointed
+          to a discoverability problem, not a checkout problem. By placing the
+          purchase entry point in the persistent navigation and on high-traffic
+          pages like the home page and exhibitions, I address the exact
+          location where the data showed users were falling out of the funnel.
+        </p>
+
+        <!-- ── Problem 3 ── -->
+        <h2>3. Checkout Errors Are Not the Barrier</h2>
+
+        <h3>The Finding</h3>
+        <p>
+          Users who encountered form errors during checkout still completed
+          their purchases at a 100% rate. While error reduction is always
+          beneficial, the data showed this was not the most impactful area for
+          improvement.
+        </p>
+
+        <h3>What I Changed</h3>
+        <p>
+          Rather than investing heavily in checkout error prevention, I
+          focused my redesign effort on the upstream problem: getting users to
+          checkout in the first place. The purchase form was given a clean,
+          modern treatment with clear labels, generous spacing, and a focused
+          single-column layout housed within a distinct card container. These
+          improvements maintain a professional checkout experience without
+          over-engineering a flow that the data showed was already effective at
+          converting users who reached it.
+        </p>
+
+        <h3>How This Connects to the Data</h3>
+        <p>
+          The 100% error recovery rate confirmed that checkout friction was
+          minimal. My redesign correctly prioritized upstream discoverability
+          and funnel length over checkout micro-optimizations, aligning
+          engineering effort with where the data showed the greatest
+          opportunity for conversion improvement.
+        </p>
+
+        <!-- ── Problem 4 ── -->
+        <h2>4. Member Conversion</h2>
+
+        <h3>The Problem</h3>
+        <p>
+          Members converted at a lower rate (7.64%) than guests (9.79%) and
+          students (9.03%). This suggested that member-specific flows may have
+          introduced unnecessary complexity, or that the purchase experience
+          was not tailored to users who may already have admission included in
+          their membership.
+        </p>
+
+        <h3>What I Changed</h3>
+        <p>
+          The ticket pricing table now clearly communicates that member
+          admission is free, with a distinct row that differentiates the member
+          benefit from paid ticket types. This transparency reduces confusion
+          for returning members who may have been navigating the full purchase
+          funnel unnecessarily, unsure whether they needed to buy a ticket at
+          all. The streamlined navigation and shortened funnel also benefit
+          members disproportionately, as they are likely repeat visitors who
+          previously had to re-navigate the same lengthy browsing path on each
+          return visit.
+        </p>
+
+        <h3>How This Connects to the Data</h3>
+        <p>
+          The lower member conversion rate suggested friction specific to
+          returning users. By clarifying membership benefits at the point of
+          purchase and reducing navigation overhead for repeat visitors, we
+          address the likely causes of member drop-off without introducing a
+          separate, complex member-specific flow.
+        </p>
+
+        <!-- ── Summary ── -->
+        <h2>5. Design Summary</h2>
+
+        <h3>Visual Direction</h3>
+        <p>
+          The redesign adopts an elegant, modern aesthetic with a neutral
+          black-white-gray palette accented by blue. Headings use Instrument
+          Serif for a refined, editorial quality. Subheadings and body text use
+          Roboto in varying weights and cases to create clear typographic
+          hierarchy. This visual system communicates the sophistication of a
+          contemporary art museum while maintaining the clarity and
+          scannability needed for efficient task completion.
+        </p>
+
+        <h3>Information Architecture</h3>
+        <p>
+          The site was restructured around a single guiding principle: reduce
+          the distance between landing and purchasing. The persistent
+          navigation bar provides consistent orientation across all pages. The
+          home page hero section serves as both a brand introduction and a
+          direct purchase entry point. Content pages like Explore and
+          Exhibitions are streamlined to deliver value without creating
+          browsing loops that delay conversion.
+        </p>
+
+        <h3>Key Metrics I Expect to Improve</h3>
+        <ul>
+          <li>Funnel step count reduced from ~10 to ~3-4 steps, approaching the 5.1-step industry benchmark</li>
+          <li>Ticket purchase discoverability improved through persistent navigation and hero placement</li>
+          <li>Member confusion reduced through clear benefit communication at point of purchase</li>
+          <li>Overall conversion rate targeted to improve beyond the current 9.45% baseline</li>
+        </ul>
+      </main>
+      <footer class="footer">
+        <p id="copyYear"></p>
+      </footer>
+    </div>
+  </body>
+</html>
