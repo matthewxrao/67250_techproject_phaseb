@@ -6,7 +6,7 @@ var MUSEUM_ZOOM = 15;
 var MUSEUM_NAME = "MonoMuse Museum";
 var YOUTUBE_VIDEO_ID = "ruXv972PEcQ";
 var TICKET_PRICE = 18;
-var IMAGE_DURATION = 3000;
+var IMAGE_DURATION = 8000; // 8 seconds
 
 /* === Navigation Bar === */
 function buildNav() {
@@ -314,6 +314,23 @@ function highlightActiveHOP(day) {
   }
 }
 
+/* === Slideshow Progress Bar === */
+var progress = 0;
+var tickMs = 10;
+var step = 100 / (IMAGE_DURATION / tickMs);
+var fill = document.getElementById("slideshowProgressFill");
+
+setInterval(function () {
+  progress = Math.min(progress + step, 100);
+  fill.style.width = progress + "%";
+}, tickMs);
+
+// whenever slide changes:
+function resetProgress() {
+  progress = 0;
+  fill.style.width = "0%";
+}
+
 /* === DOM Runner === */
 document.addEventListener("DOMContentLoaded", function() {
     const images = [
@@ -323,13 +340,63 @@ document.addEventListener("DOMContentLoaded", function() {
     "../static/image4.png",
   ];
 
-  // slideshow logic
+  const altTexts = [
+    "Outside View of MonoMuse Museum",
+    "Hall of Statues",
+    "Famous Marble Staircases",
+    "Statue of Galileo",
+  ];
+
+  // set on page load
+  var slideshowImage = document.getElementById("slide");
+  if (slideshowImage) {
+    var track = document.createElement("div");
+    track.id = "slideshowProgressTrack";
+    track.style.width = "100%";
+    track.style.height = "6px";
+    track.style.background = "#d9d9d9";
+    track.style.borderRadius = "999px";
+    track.style.overflow = "hidden";
+    track.style.marginTop = "10px";
+
+    var fill = document.createElement("div");
+    fill.id = "slideshowProgressFill";
+    fill.style.width = "0%";
+    fill.style.height = "100%";
+    fill.style.background = "#111";
+    fill.style.transition = "width 0.05s linear";
+
+    track.appendChild(fill);
+    slideshowImage.insertAdjacentElement("afterend", track);
+
+    var progress = 0;
+    var tickMs = 50;
+    var step = 100 / (IMAGE_DURATION / tickMs);
+
+    setInterval(function() {
+      progress = Math.min(progress + step, 100);
+      fill.style.width = progress + "%";
+    }, tickMs);
+
+    var observer = new MutationObserver(function() {
+      progress = 0;
+      fill.style.width = "0%";
+    });
+
+    observer.observe(slideshowImage, {
+      attributes: true,
+      attributeFilter: ["src"]
+    });
+  }
+
+  // auto-advance slideshow
   let i = 0;
   const slide = document.getElementById("slide");
 
   function showNextImage() {
     i = (i + 1) % images.length;
     slide.src = images[i];
+    slide.alt = altTexts[i];
   }
   setInterval(showNextImage, IMAGE_DURATION);
 
