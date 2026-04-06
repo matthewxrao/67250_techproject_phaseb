@@ -271,6 +271,176 @@ tr:hover td {
   background: rgba(245, 245, 247, 0.02);
 }
 
+/* === Dialog / Checkout === */
+dialog {
+  background: #1a1a1d;
+  color: #f5f5f7;
+  border: 1px solid rgba(245, 245, 247, 0.08);
+  border-radius: 16px;
+  padding: 0;
+  max-width: 480px;
+  width: 90vw;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.dialog-content {
+  padding: 32px;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.dialog-close {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.dialog-close:hover {
+  color: #f5f5f7;
+}
+
+.required {
+  color: #3b82f6;
+}
+
+.optional {
+  color: #555;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.error-msg {
+  display: block;
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 4px;
+  min-height: 18px;
+}
+
+.input-error {
+  border-color: #ef4444 !important;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: auto;
+  accent-color: #3b82f6;
+}
+
+.checkbox-label {
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  color: rgba(245, 245, 247, 0.78);
+  margin: 0 !important;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(245, 245, 247, 0.08);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+#orderTotal {
+  font-size: 24px;
+  font-weight: 500;
+  color: #3b82f6;
+}
+
+/* === Confirmation === */
+.confirmation-body {
+  text-align: center;
+}
+
+.confirm-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: #fff;
+  font-size: 32px;
+  line-height: 64px;
+  margin: 0 auto 20px;
+}
+
+.confirm-msg {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 28px;
+  color: #f5f5f7;
+  margin-bottom: 8px;
+  max-width: none;
+}
+
+.confirm-detail {
+  font-size: 14px;
+  color: rgba(245, 245, 247, 0.6);
+  margin-bottom: 24px;
+  max-width: none;
+}
+
+.confirm-summary {
+  text-align: left;
+  background: rgba(245, 245, 247, 0.03);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.confirm-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+  color: rgba(245, 245, 247, 0.7);
+  border-bottom: 1px solid rgba(245, 245, 247, 0.04);
+}
+
+.confirm-row:last-child {
+  border-bottom: none;
+}
+
+.confirm-total {
+  font-size: 16px;
+  font-weight: 500;
+  color: #f5f5f7;
+  padding-top: 12px;
+}
+
 #purchaseForm {
   display: none;
   margin-top: 40px;
@@ -297,7 +467,10 @@ form label {
   margin-top: 20px;
 }
 
-form input,
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form input[type="date"],
 form select {
   width: 100%;
   padding: 12px 14px;
@@ -310,6 +483,7 @@ form select {
   font-weight: 300;
   outline: none;
   transition: border-color 0.2s;
+  color-scheme: dark;
 }
 
 form input:focus,
@@ -796,5 +970,12 @@ form .cta {
   .font-row {
     flex-direction: column;
     gap: 8px;
+  }
+
+  .slideshow img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: opacity 0.5s ease-in-out;
   }
 }

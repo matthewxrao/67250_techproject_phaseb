@@ -1,4 +1,4 @@
-function ActiveNav() {
+function highlightActiveNav() {
   const navLinks = document.querySelectorAll('nav a');
   navLinks.forEach(link => {
     if (window.location.href === link.href) {
@@ -7,7 +7,7 @@ function ActiveNav() {
   });
 }
 
-ActiveNav();
+highlightActiveNav();
 
 var now = new Date();
 var hour = now.getHours();

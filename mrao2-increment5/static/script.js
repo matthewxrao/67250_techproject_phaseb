@@ -5,7 +5,7 @@ var MUSEUM_ZOOM = 15;
 var MUSEUM_NAME = "MonoMuse Museum";
 var YOUTUBE_VIDEO_ID = "ruXv972PEcQ";
 
-function ActiveNav() {
+function highlightActiveNav() {
   var navLinks = document.querySelectorAll('nav a');
   var currentpage = window.location.href;
   navLinks.forEach(function(link) {
@@ -15,7 +15,7 @@ function ActiveNav() {
   });
 }
 
-ActiveNav();
+highlightActiveNav();
 
 var now = new Date();
 var hour = now.getHours();

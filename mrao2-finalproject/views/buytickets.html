@@ -22,10 +22,13 @@
   </head>
   <body>
     <div class="container">
+      <!-- Navigation bar -->
       <div id="site-nav"></div>
+
       <main class="main">
         <h1>Buy Tickets</h1>
 
+        <!-- Pricing table: ticket types and costs -->
         <h3>Ticket Prices</h3>
         <table>
           <tr>
@@ -36,12 +39,12 @@
           <tr>
             <td>General</td>
             <td>Full access to all permanent and rotating exhibitions</td>
-            <td>$25.00</td>
+            <td>$18.00</td>
           </tr>
           <tr>
             <td>Student</td>
             <td>Discounted admission with a valid student ID</td>
-            <td>$15.00</td>
+            <td>$18.00</td>
           </tr>
           <tr>
             <td>Member</td>
@@ -49,10 +52,11 @@
               Unlimited visits, early access to new exhibitions, and exclusive
               events
             </td>
-            <td>Free</td>
+            <td>$18.00</td>
           </tr>
         </table>
 
+        <!-- Event schedule table with Buy Now buttons -->
         <h3>April 2026 Schedule</h3>
         <table>
           <tr>
@@ -66,7 +70,7 @@
             <td>Digital Horizons Opening</td>
             <td>Available</td>
             <td>
-              <button class="cta buy-now-btn" onclick="showPurchaseForm()">
+              <button class="cta buy-now-btn" onclick="openCheckout()">
                 Buy Now
               </button>
             </td>
@@ -76,7 +80,7 @@
             <td>The Machine Garden Tour</td>
             <td>Available</td>
             <td>
-              <button class="cta buy-now-btn" onclick="showPurchaseForm()">
+              <button class="cta buy-now-btn" onclick="openCheckout()">
                 Buy Now
               </button>
             </td>
@@ -86,7 +90,7 @@
             <td>Echoes of Light Experience</td>
             <td>Available</td>
             <td>
-              <button class="cta buy-now-btn" onclick="showPurchaseForm()">
+              <button class="cta buy-now-btn" onclick="openCheckout()">
                 Buy Now
               </button>
             </td>
@@ -96,51 +100,148 @@
             <td>Family Day at MonoMuse</td>
             <td>Available</td>
             <td>
-              <button class="cta buy-now-btn" onclick="showPurchaseForm()">
+              <button class="cta buy-now-btn" onclick="openCheckout()">
                 Buy Now
               </button>
             </td>
           </tr>
         </table>
 
-        <dialog>
-          <div id="purchaseForm">
-            <h3>Purchase Tickets</h3>
-            <form>
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required />
+        <!-- Checkout dialog: form with date, type, quantity, email, zip, mailing list -->
+        <dialog id="checkoutDialog">
+          <div class="dialog-content">
+            <div class="dialog-header">
+              <h2>Ticket Checkout</h2>
+              <button class="dialog-close" onclick="closeCheckout()">
+                &times;
+              </button>
+            </div>
+            <form id="checkoutForm" novalidate>
+              <label for="visitDate"
+                >Visit Date <span class="required">*</span></label
+              >
+              <input type="date" id="visitDate" name="visitDate" required />
+              <span class="error-msg" id="visitDateError"></span>
 
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required />
+              <label for="ticketType"
+                >Ticket Type <span class="required">*</span></label
+              >
+              <select id="ticketType" name="ticketType" required>
+                <option value="">Select a ticket type</option>
+                <option value="general">General</option>
+                <option value="student">Student</option>
+                <option value="member">Member</option>
+              </select>
+              <span class="error-msg" id="ticketTypeError"></span>
 
-              <label for="quantity">Number of Tickets</label>
+              <label for="ticketQty"
+                >Quantity (1–10) <span class="required">*</span></label
+              >
               <input
                 type="number"
-                id="quantity"
-                name="quantity"
+                id="ticketQty"
+                name="ticketQty"
                 min="1"
+                max="10"
+                value="1"
                 required
               />
+              <span class="error-msg" id="ticketQtyError"></span>
 
-              <label for="date">Selected Date</label>
-              <select id="date" name="date">
-                <option value="april5">April 5, 2026</option>
-                <option value="april12">April 12, 2026</option>
-                <option value="april19">April 19, 2026</option>
-                <option value="april26">April 26, 2026</option>
-              </select>
+              <label for="checkoutEmail"
+                >Email <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                id="checkoutEmail"
+                name="checkoutEmail"
+                placeholder="you@example.com"
+                required
+              />
+              <span class="error-msg" id="checkoutEmailError"></span>
+
+              <label for="zipCode"
+                >Zip Code <span class="optional">(optional)</span></label
+              >
+              <input
+                type="text"
+                id="zipCode"
+                name="zipCode"
+                maxlength="5"
+                placeholder="e.g. 15213"
+              />
+              <span class="error-msg" id="zipCodeError"></span>
+
+              <div class="checkbox-row">
+                <input type="checkbox" id="mailingList" name="mailingList" />
+                <label for="mailingList" class="checkbox-label"
+                  >Join our mailing list</label
+                >
+              </div>
+
+              <div class="order-total">
+                <span>Total</span>
+                <span id="orderTotal">$18.00</span>
+              </div>
 
               <button
-                type="button"
+                type="submit"
                 class="cta"
-                onclick="alert('Redirecting to payment system.')"
+                style="width: 100%; text-align: center"
               >
-                Submit
+                Place Order
               </button>
             </form>
           </div>
         </dialog>
+
+        <!-- Order confirmation dialog: shows summary with total cost -->
+        <dialog id="confirmDialog">
+          <div class="dialog-content">
+            <div class="dialog-header">
+              <h2>Order Confirmed</h2>
+              <button class="dialog-close" onclick="closeConfirm()">
+                &times;
+              </button>
+            </div>
+            <div class="confirmation-body">
+              <!-- unicode checkmark :] -->
+              <div class="confirm-icon">&#10003;</div>
+              <p class="confirm-msg">Thank you for your purchase!</p>
+              <p class="confirm-detail">
+                Your tickets have been reserved. A confirmation email will be
+                sent to <strong id="confirmEmail"></strong>.
+              </p>
+              <div class="confirm-summary">
+                <div class="confirm-row">
+                  <span>Date</span>
+                  <span id="confirmDate"></span>
+                </div>
+                <div class="confirm-row">
+                  <span>Type</span>
+                  <span id="confirmType"></span>
+                </div>
+                <div class="confirm-row">
+                  <span>Quantity</span>
+                  <span id="confirmQty"></span>
+                </div>
+                <div class="confirm-row confirm-total">
+                  <span>Total</span>
+                  <span id="confirmTotal"></span>
+                </div>
+              </div>
+              <button
+                class="cta"
+                style="width: 100%; text-align: center; margin-top: 24px"
+                onclick="closeConfirm()"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </dialog>
       </main>
+      <!-- Footer -->
       <footer class="footer">
         <p id="copyYear"></p>
       </footer>

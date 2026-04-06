@@ -1,3 +1,14 @@
+/* === Global Constants === */
+var GOOGLE_MAPS_API_KEY = "AIzaSyC2pPp5rkIENtDJkiIpPeGOcqBYD5K7kZE";
+var MUSEUM_LAT = 40.4433;
+var MUSEUM_LNG = -79.9500;
+var MUSEUM_ZOOM = 15;
+var MUSEUM_NAME = "MonoMuse Museum";
+var YOUTUBE_VIDEO_ID = "ruXv972PEcQ";
+var TICKET_PRICE = 18;
+var IMAGE_DURATION = 3000;
+
+/* === Navigation Bar === */
 function buildNav() {
   var isSubpage = window.location.pathname.indexOf("/views/") !== -1;
   var prefix = isSubpage ? "../" : "./";
@@ -42,14 +53,7 @@ document.addEventListener("click", function(e) {
   }
 });
 
-var GOOGLE_MAPS_API_KEY = "AIzaSyC2pPp5rkIENtDJkiIpPeGOcqBYD5K7kZE";
-var MUSEUM_LAT = 40.4433;
-var MUSEUM_LNG = -79.9500;
-var MUSEUM_ZOOM = 15;
-var MUSEUM_NAME = "MonoMuse Museum";
-var YOUTUBE_VIDEO_ID = "ruXv972PEcQ";
-
-function ActiveNav() {
+function highlightActiveNav() {
   var navLinks = document.querySelectorAll('nav a');
   var currentpage = window.location.href;
   navLinks.forEach(function(link) {
@@ -59,6 +63,14 @@ function ActiveNav() {
   });
 }
 
+function toggleNav() {
+  var navbar = document.querySelector(".nav_bar");
+  if (navbar) {
+    navbar.classList.toggle("responsive");
+  }
+}
+
+/* === Greeting === */
 function greeting(x) {
   var el = document.getElementById("greeting");
   if (el) {
@@ -74,6 +86,7 @@ function greeting(x) {
   }
 }
 
+/* === Footer === */
 function addYear() {
   var yearEl = document.getElementById("copyYear");
   if (yearEl) {
@@ -81,14 +94,7 @@ function addYear() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  buildNav();
-  ActiveNav();
-  greeting(new Date().getHours());
-  addYear();
-  loadGoogleMaps();
-});
-
+/* === Read More / Read Less toggle === */
 if (typeof $ !== 'undefined') {
   $(document).ready(function() {
     $("#readLess").click(function() {
@@ -105,20 +111,141 @@ if (typeof $ !== 'undefined') {
   });
 }
 
-function showPurchaseForm() {
-  var form = document.getElementById("purchaseForm");
+/* === Checkout === */
+function openCheckout() {
+  var dialog = document.getElementById("checkoutDialog");
+  if (dialog) {
+    dialog.showModal();
+    updateTotal();
+  }
+}
+
+function closeCheckout() {
+  var dialog = document.getElementById("checkoutDialog");
+  if (dialog) dialog.close();
+}
+
+function closeConfirm() {
+  var dialog = document.getElementById("confirmDialog");
+  if (dialog) dialog.close();
+}
+
+function updateTotal() {
+  var qty = parseInt(document.getElementById("ticketQty").value) || 0;
+  if (qty < 1) qty = 1;
+  if (qty > 10) qty = 10;
+  var total = qty * TICKET_PRICE;
+  var el = document.getElementById("orderTotal");
+  if (el) el.textContent = "$" + total.toFixed(2);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  var qtyInput = document.getElementById("ticketQty");
+  if (qtyInput) {
+    qtyInput.addEventListener("input", updateTotal);
+  }
+
+  var form = document.getElementById("checkoutForm");
   if (form) {
-    form.style.display = "block";
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (validateCheckout()) {
+        showConfirmation();
+      }
+    });
   }
+
+  // close dialog on backdrop click
+  var dialogs = document.querySelectorAll("dialog");
+  dialogs.forEach(function(d) {
+    d.addEventListener("click", function(e) {
+      if (e.target === d) d.close();
+    });
+  });
+});
+
+/* === Form Validation === */
+function clearErrors() {
+  var msgs = document.querySelectorAll(".error-msg");
+  msgs.forEach(function(el) { el.textContent = ""; });
+  var inputs = document.querySelectorAll("#checkoutForm input, #checkoutForm select");
+  inputs.forEach(function(el) { el.classList.remove("input-error"); });
 }
 
-function toggleNav() {
-  var navbar = document.querySelector(".nav_bar");
-  if (navbar) {
-    navbar.classList.toggle("responsive");
-  }
+function showError(id, msg) {
+  var el = document.getElementById(id);
+  if (el) el.textContent = msg;
+  // also mark the input
+  var inputId = id.replace("Error", "");
+  var input = document.getElementById(inputId);
+  if (input) input.classList.add("input-error");
 }
 
+function validateCheckout() {
+  clearErrors();
+  var valid = true;
+
+  var date = document.getElementById("visitDate").value;
+  if (!date) {
+    showError("visitDateError", "Please select a visit date.");
+    valid = false;
+  }
+
+  var type = document.getElementById("ticketType").value;
+  if (!type) {
+    showError("ticketTypeError", "Please select a ticket type.");
+    valid = false;
+  }
+
+  var qty = parseInt(document.getElementById("ticketQty").value);
+  if (!qty || qty < 1 || qty > 10 || isNaN(qty)) {
+    showError("ticketQtyError", "Please enter a quantity between 1 and 10.");
+    valid = false;
+  }
+
+  var email = document.getElementById("checkoutEmail").value.trim();
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email) {
+    showError("checkoutEmailError", "Please enter your email address.");
+    valid = false;
+  } else if (!emailPattern.test(email)) {
+    showError("checkoutEmailError", "Please enter a valid email address.");
+    valid = false;
+  }
+
+  var zip = document.getElementById("zipCode").value.trim();
+  if (zip && !/^\d{5}$/.test(zip)) {
+    showError("zipCodeError", "Zip code must be exactly 5 digits.");
+    valid = false;
+  }
+
+  return valid;
+}
+
+/* === Confirmation === */
+function showConfirmation() {
+  var qty = parseInt(document.getElementById("ticketQty").value);
+  var total = qty * TICKET_PRICE;
+  var email = document.getElementById("checkoutEmail").value.trim();
+  var date = document.getElementById("visitDate").value;
+  var type = document.getElementById("ticketType").value;
+
+  // capitalize type
+  var typeLabel = type.charAt(0).toUpperCase() + type.slice(1);
+
+  document.getElementById("confirmEmail").textContent = email;
+  document.getElementById("confirmDate").textContent = date;
+  document.getElementById("confirmType").textContent = typeLabel;
+  document.getElementById("confirmQty").textContent = qty;
+  document.getElementById("confirmTotal").textContent = "$" + total.toFixed(2);
+
+  closeCheckout();
+
+  var dialog = document.getElementById("confirmDialog");
+  if (dialog) dialog.showModal();
+}
+
+/* === Google Maps === */
 function initMap() {
   var mapEl = document.getElementById("map");
   if (mapEl && typeof google !== 'undefined' && google.maps) {
@@ -141,6 +268,17 @@ function initMap() {
   }
 }
 
+function loadGoogleMaps() {
+  if (document.getElementById("map")) {
+    var script = document.createElement("script");
+    script.src = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_MAPS_API_KEY + "&callback=initMap&loading=async";
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+}
+
+/* === YouTube Player === */
 var ytPlayer;
 
 function onYouTubeIframeAPIReady() {
@@ -157,12 +295,29 @@ function onYouTubeIframeAPIReady() {
   }
 }
 
-function loadGoogleMaps() {
-  if (document.getElementById("map")) {
-    var script = document.createElement("script");
-    script.src = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_MAPS_API_KEY + "&callback=initMap&loading=async";
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
+/* === DOM Runner === */
+document.addEventListener("DOMContentLoaded", function() {
+    const images = [
+    "../static/image1.png",
+    "../static/image2.png",
+    "../static/image3.png",
+    "../static/image4.png",
+  ];
+
+  // slideshow logic
+  let i = 0;
+  const slide = document.getElementById("slide");
+
+  function showNextImage() {
+    i = (i + 1) % images.length;
+    slide.src = images[i];
   }
-}
+  setInterval(showNextImage, IMAGE_DURATION);
+
+  // load page elements
+  buildNav();
+  highlightActiveNav();
+  greeting(new Date().getHours());
+  addYear();
+  loadGoogleMaps();
+});
