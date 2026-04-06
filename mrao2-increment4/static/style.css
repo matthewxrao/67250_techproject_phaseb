@@ -10,7 +10,6 @@
   color: #f5f5f7;
 }
 
-/* CSS Grid Layout */
 .container {
   display: grid;
   grid-template-areas:
@@ -95,7 +94,6 @@ form * {
   text-align: center;
 }
 
-/* Read More / Read Less */
 #longIntro {
   display: none;
 }
@@ -108,7 +106,6 @@ form * {
   cursor: pointer;
 }
 
-/* Purchase form hidden by default */
 #purchaseForm {
   display: none;
 }

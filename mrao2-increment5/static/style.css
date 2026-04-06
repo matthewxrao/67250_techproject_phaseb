@@ -10,7 +10,6 @@
   color: #f5f5f7;
 }
 
-/* CSS Grid Layout */
 .container {
   display: grid;
   grid-template-areas:
@@ -96,7 +95,6 @@ form * {
   text-align: center;
 }
 
-/* Read More / Read Less */
 #longIntro {
   display: none;
 }
@@ -109,12 +107,10 @@ form * {
   cursor: pointer;
 }
 
-/* Purchase form hidden by default */
 #purchaseForm {
   display: none;
 }
 
-/* Hamburger icon - hidden by default on desktop */
 .hamburger {
   display: none;
   font-size: 24px;
@@ -133,7 +129,6 @@ form * {
   color: unset;
 }
 
-/* YouTube video responsive container */
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
@@ -152,7 +147,6 @@ form * {
   border: none;
 }
 
-/* ===== Mobile Responsive Layout (< 650px) ===== */
 @media only screen and (max-width: 650px) {
   .container {
     grid-template-areas:
@@ -173,7 +167,6 @@ form * {
     align-items: flex-start;
   }
 
-  /* Hide nav links except first (Home) and hamburger */
   .nav_bar a:not(:first-child):not(.hamburger) {
     display: none;
   }
@@ -184,7 +177,6 @@ form * {
     right: 15px;
   }
 
-  /* When responsive class is added, show the links vertically */
   .nav_bar.responsive a {
     display: block;
   }
