@@ -68,6 +68,9 @@ body {
 .active {
   color: #3b82f6 !important;
 }
+.active-hops {
+  font-weight: 800 !important;
+}
 
 .nav-spacer {
   flex: 1;

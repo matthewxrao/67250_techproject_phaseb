@@ -295,6 +295,25 @@ function onYouTubeIframeAPIReady() {
   }
 }
 
+function highlightActiveHOP(day) {
+  var dayMap = {
+    0: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday"
+  };
+  var dayName = dayMap[day];
+  if (dayName) {
+    var el = document.getElementById(dayName);
+    if (el) {
+      el.classList.add("active-hops");
+    }
+  }
+}
+
 /* === DOM Runner === */
 document.addEventListener("DOMContentLoaded", function() {
     const images = [
@@ -317,7 +336,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // load page elements
   buildNav();
   highlightActiveNav();
+  highlightActiveHOP(new Date().getDay());
   greeting(new Date().getHours());
   addYear();
   loadGoogleMaps();
-});
+}); 
