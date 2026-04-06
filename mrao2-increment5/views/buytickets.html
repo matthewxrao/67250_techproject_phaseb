@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="author" content="Your name" />
+  <meta name="keywords" content="Museum, Carnegie Mellon University, Information Systems" />
+  <meta name="description" content="MonoMuse website redesign project" />
+  <title>MonoMuse - Buy Tickets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/style.css" />
+  <script src="../static/script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <img id="logo" src="../static/monomuselogo.png" alt="MonoMuse Museum Logo" />
+    </header>
+    <nav class="nav_bar">
+      <a href="../index.html">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="exhibitions.html">Exhibitions</a>
+      <a href="buytickets.html">Buy Tickets</a>
+    </nav>
+    <main class="main">
+      <h1>Buy Tickets</h1>
+
+      <h3>Ticket Prices</h3>
+      <table>
+        <tr>
+          <th>Ticket Type</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+        <tr>
+          <td>General</td>
+          <td>Full access to all permanent and rotating exhibitions</td>
+          <td>$25.00</td>
+        </tr>
+        <tr>
+          <td>Student</td>
+          <td>Discounted admission with a valid student ID</td>
+          <td>$15.00</td>
+        </tr>
+        <tr>
+          <td>Member</td>
+          <td>Unlimited visits, early access to new exhibitions, and exclusive events</td>
+          <td>Free</td>
+        </tr>
+      </table>
+
+      <h3>April 2026 Schedule</h3>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Event</th>
+          <th>Availability</th>
+          <th>Action</th>
+        </tr>
+        <tr>
+          <td>April 5, 2026</td>
+          <td>Digital Horizons Opening</td>
+          <td>Available</td>
+          <td><button class="cta buy-now-btn" onclick="showPurchaseForm()">Buy Now</button></td>
+        </tr>
+        <tr>
+          <td>April 12, 2026</td>
+          <td>The Machine Garden Tour</td>
+          <td>Available</td>
+          <td><button class="cta buy-now-btn" onclick="showPurchaseForm()">Buy Now</button></td>
+        </tr>
+        <tr>
+          <td>April 19, 2026</td>
+          <td>Echoes of Light Experience</td>
+          <td>Available</td>
+          <td><button class="cta buy-now-btn" onclick="showPurchaseForm()">Buy Now</button></td>
+        </tr>
+        <tr>
+          <td>April 26, 2026</td>
+          <td>Family Day at MonoMuse</td>
+          <td>Available</td>
+          <td><button class="cta buy-now-btn" onclick="showPurchaseForm()">Buy Now</button></td>
+        </tr>
+      </table>
+
+      <div id="purchaseForm">
+        <h3>Purchase Tickets</h3>
+        <form>
+          <label for="name">Name:</label><br />
+          <input type="text" id="name" name="name" required /><br /><br />
+
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" required /><br /><br />
+
+          <label for="quantity">Number of Tickets:</label><br />
+          <input type="number" id="quantity" name="quantity" min="1" required /><br /><br />
+
+          <label for="date">Selected Date:</label><br />
+          <select id="date" name="date">
+            <option value="april5">April 5, 2026</option>
+            <option value="april12">April 12, 2026</option>
+            <option value="april19">April 19, 2026</option>
+            <option value="april26">April 26, 2026</option>
+          </select><br /><br />
+
+          <button type="button" class="cta" onclick="alert('Redirecting to payment system.')">Submit</button>
+        </form>
+      </div>
+    </main>
+    <footer class="footer">
+      <p id="copyYear"></p>
+    </footer>
+  </div>
+</body>
+</html>
