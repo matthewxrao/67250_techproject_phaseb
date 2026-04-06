@@ -1,7 +1,7 @@
 /* === Global Constants === */
 var GOOGLE_MAPS_API_KEY = "AIzaSyC2pPp5rkIENtDJkiIpPeGOcqBYD5K7kZE";
 var MUSEUM_LAT = 40.4433;
-var MUSEUM_LNG = -79.9500;
+var MUSEUM_LNG = -79.95;
 var MUSEUM_ZOOM = 15;
 var MUSEUM_NAME = "MonoMuse Museum";
 var YOUTUBE_VIDEO_ID = "ruXv972PEcQ";
@@ -19,23 +19,39 @@ function buildNav() {
 
   nav.innerHTML =
     '<nav class="nav_bar">' +
-      '<a href="' + prefix + 'index.html" class="nav-logo">' +
-        '<img id="logo" src="' + prefix + 'static/monomuselogo.png" alt="MonoMuse Museum Logo" style="height:60px;"/>' +
-      '</a>' +
-      '<a href="' + prefix + 'index.html">Home</a>' +
-      '<a href="' + viewPrefix + 'explore.html">Explore</a>' +
-      '<a href="' + viewPrefix + 'exhibitions.html">Exhibitions</a>' +
-      '<a href="' + viewPrefix + 'buytickets.html">Buy Tickets</a>' +
-      '<span class="nav-spacer"></span>' +
-      '<div class="nav-dropdown">' +
-        '<button class="nav-dropdown-toggle" onclick="toggleExtras()"> EXTRAS &#9662;</button>' +
-        '<div class="nav-dropdown-menu">' +
-          '<a href="' + viewPrefix + 'designguide.html">Design Guide</a>' +
-          '<a href="' + viewPrefix + 'designrationale.html">Design Rationale</a>' +
-        '</div>' +
-      '</div>' +
-      '<a href="javascript:void(0);" class="hamburger" onclick="toggleNav()">&#9776;</a>' +
-    '</nav>';
+    '<a href="' +
+    prefix +
+    'index.html" class="nav-logo">' +
+    '<img id="logo" src="' +
+    prefix +
+    'static/monomuselogo.png" alt="MonoMuse Museum Logo" style="height:60px;"/>' +
+    "</a>" +
+    '<a href="' +
+    prefix +
+    'index.html">Home</a>' +
+    '<a href="' +
+    viewPrefix +
+    'explore.html">Explore</a>' +
+    '<a href="' +
+    viewPrefix +
+    'exhibitions.html">Exhibitions</a>' +
+    '<a href="' +
+    viewPrefix +
+    'buytickets.html">Buy Tickets</a>' +
+    '<span class="nav-spacer"></span>' +
+    '<div class="nav-dropdown">' +
+    '<button class="nav-dropdown-toggle" onclick="toggleExtras()"> EXTRAS &#9662;</button>' +
+    '<div class="nav-dropdown-menu">' +
+    '<a href="' +
+    viewPrefix +
+    'designguide.html">Design Guide</a>' +
+    '<a href="' +
+    viewPrefix +
+    'designrationale.html">Design Rationale</a>' +
+    "</div>" +
+    "</div>" +
+    '<a href="javascript:void(0);" class="hamburger" onclick="toggleNav()">&#9776;</a>' +
+    "</nav>";
 }
 
 function toggleExtras() {
@@ -45,7 +61,7 @@ function toggleExtras() {
   }
 }
 
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
   var dropdown = document.querySelector(".nav-dropdown");
   var menu = document.querySelector(".nav-dropdown-menu");
   if (dropdown && menu && !dropdown.contains(e.target)) {
@@ -54,9 +70,9 @@ document.addEventListener("click", function(e) {
 });
 
 function highlightActiveNav() {
-  var navLinks = document.querySelectorAll('nav a');
+  var navLinks = document.querySelectorAll("nav a");
   var currentpage = window.location.href;
-  navLinks.forEach(function(link) {
+  navLinks.forEach(function (link) {
     if (currentpage === link.href) {
       link.classList.add("active");
     }
@@ -90,20 +106,24 @@ function greeting(x) {
 function addYear() {
   var yearEl = document.getElementById("copyYear");
   if (yearEl) {
-    yearEl.innerHTML = "Copyright \u00A9 " + new Date().getFullYear() + " MonoMuse. All rights reserved." + "<br> <small> 67250 S26 TECHNOLOGY PROJECT - FINAL PROJECT </small>";
+    yearEl.innerHTML =
+      "Copyright \u00A9 " +
+      new Date().getFullYear() +
+      " MonoMuse. All rights reserved." +
+      "<br> <small> 67250 S26 TECHNOLOGY PROJECT - FINAL PROJECT </small>";
   }
 }
 
 /* === Read More / Read Less toggle === */
-if (typeof $ !== 'undefined') {
-  $(document).ready(function() {
-    $("#readLess").click(function() {
+if (typeof $ !== "undefined") {
+  $(document).ready(function () {
+    $("#readLess").click(function () {
       $("#longIntro").hide();
       $("#readLess").hide();
       $("#readMore").show();
     });
 
-    $("#readMore").click(function() {
+    $("#readMore").click(function () {
       $("#longIntro").show();
       $("#readLess").show();
       $("#readMore").hide();
@@ -139,7 +159,7 @@ function updateTotal() {
   if (el) el.textContent = "$" + total.toFixed(2);
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var qtyInput = document.getElementById("ticketQty");
   if (qtyInput) {
     qtyInput.addEventListener("input", updateTotal);
@@ -147,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var form = document.getElementById("checkoutForm");
   if (form) {
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (validateCheckout()) {
         showConfirmation();
@@ -157,8 +177,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // close dialog on backdrop click
   var dialogs = document.querySelectorAll("dialog");
-  dialogs.forEach(function(d) {
-    d.addEventListener("click", function(e) {
+  dialogs.forEach(function (d) {
+    d.addEventListener("click", function (e) {
       if (e.target === d) d.close();
     });
   });
@@ -167,9 +187,15 @@ document.addEventListener("DOMContentLoaded", function() {
 /* === Form Validation === */
 function clearErrors() {
   var msgs = document.querySelectorAll(".error-msg");
-  msgs.forEach(function(el) { el.textContent = ""; });
-  var inputs = document.querySelectorAll("#checkoutForm input, #checkoutForm select");
-  inputs.forEach(function(el) { el.classList.remove("input-error"); });
+  msgs.forEach(function (el) {
+    el.textContent = "";
+  });
+  var inputs = document.querySelectorAll(
+    "#checkoutForm input, #checkoutForm select",
+  );
+  inputs.forEach(function (el) {
+    el.classList.remove("input-error");
+  });
 }
 
 function showError(id, msg) {
@@ -248,21 +274,21 @@ function showConfirmation() {
 /* === Google Maps === */
 function initMap() {
   var mapEl = document.getElementById("map");
-  if (mapEl && typeof google !== 'undefined' && google.maps) {
+  if (mapEl && typeof google !== "undefined" && google.maps) {
     var museumLocation = { lat: MUSEUM_LAT, lng: MUSEUM_LNG };
     var map = new google.maps.Map(mapEl, {
       center: museumLocation,
-      zoom: MUSEUM_ZOOM
+      zoom: MUSEUM_ZOOM,
     });
     var marker = new google.maps.Marker({
       position: museumLocation,
       map: map,
-      title: MUSEUM_NAME
+      title: MUSEUM_NAME,
     });
     var infoWindow = new google.maps.InfoWindow({
-      content: "<h3>" + MUSEUM_NAME + "</h3>"
+      content: "<h3>" + MUSEUM_NAME + "</h3>",
     });
-    marker.addListener("click", function() {
+    marker.addListener("click", function () {
       infoWindow.open(map, marker);
     });
   }
@@ -271,7 +297,10 @@ function initMap() {
 function loadGoogleMaps() {
   if (document.getElementById("map")) {
     var script = document.createElement("script");
-    script.src = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_MAPS_API_KEY + "&callback=initMap&loading=async";
+    script.src =
+      "https://maps.googleapis.com/maps/api/js?key=" +
+      GOOGLE_MAPS_API_KEY +
+      "&callback=initMap&loading=async";
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
@@ -284,13 +313,13 @@ var ytPlayer;
 function onYouTubeIframeAPIReady() {
   var playerEl = document.getElementById("youtube-player");
   if (playerEl) {
-    ytPlayer = new YT.Player('youtube-player', {
+    ytPlayer = new YT.Player("youtube-player", {
       videoId: YOUTUBE_VIDEO_ID,
       playerVars: {
         autoplay: 0,
         modestbranding: 1,
-        rel: 0
-      }
+        rel: 0,
+      },
     });
   }
 }
@@ -303,7 +332,7 @@ function highlightActiveHOP(day) {
     3: "Wednesday",
     4: "Thursday",
     5: "Friday",
-    6: "Saturday"
+    6: "Saturday",
   };
   var dayName = dayMap[day];
   if (dayName) {
@@ -315,90 +344,94 @@ function highlightActiveHOP(day) {
 }
 
 /* === Slideshow Progress Bar === */
-var progress = 0;
-var tickMs = 10;
-var step = 100 / (IMAGE_DURATION / tickMs);
-var fill = document.getElementById("slideshowProgressFill");
+if (window.location.href.includes("explore.html")) {
+  var progress = 0;
+  var tickMs = 10;
+  var step = 100 / (IMAGE_DURATION / tickMs);
+  var fill = document.getElementById("slideshowProgressFill");
 
-setInterval(function () {
-  progress = Math.min(progress + step, 100);
-  fill.style.width = progress + "%";
-}, tickMs);
+  setInterval(function () {
+    progress = Math.min(progress + step, 100);
+    fill.style.width = progress + "%";
+  }, tickMs);
 
-// whenever slide changes:
-function resetProgress() {
-  progress = 0;
-  fill.style.width = "0%";
+  // whenever slide changes:
+  function resetProgress() {
+    progress = 0;
+    fill.style.width = "0%";
+  }
 }
 
 /* === DOM Runner === */
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.location.href.includes("explore.html")) {
     const images = [
-    "../static/image1.png",
-    "../static/image2.png",
-    "../static/image3.png",
-    "../static/image4.png",
-  ];
+      "../static/image1.png",
+      "../static/image2.png",
+      "../static/image3.png",
+      "../static/image4.png",
+    ];
 
-  const altTexts = [
-    "Outside View of MonoMuse Museum",
-    "Hall of Statues",
-    "Famous Marble Staircases",
-    "Statue of Galileo",
-  ];
+    const altTexts = [
+      "Outside View of MonoMuse Museum",
+      "Hall of Statues",
+      "Famous Marble Staircases",
+      "Statue of Galileo",
+    ];
 
-  // set on page load
-  var slideshowImage = document.getElementById("slide");
-  if (slideshowImage) {
-    var track = document.createElement("div");
-    track.id = "slideshowProgressTrack";
-    track.style.width = "100%";
-    track.style.height = "6px";
-    track.style.background = "#d9d9d9";
-    track.style.borderRadius = "999px";
-    track.style.overflow = "hidden";
-    track.style.marginTop = "10px";
+    // set on page load
+    var slideshowImage = document.getElementById("slide");
+    if (slideshowImage) {
+      var track = document.createElement("div");
+      track.id = "slideshowProgressTrack";
+      track.style.width = "100%";
+      track.style.height = "6px";
+      track.style.background = "#d9d9d9";
+      track.style.borderRadius = "999px";
+      track.style.overflow = "hidden";
+      track.style.marginTop = "10px";
 
-    var fill = document.createElement("div");
-    fill.id = "slideshowProgressFill";
-    fill.style.width = "0%";
-    fill.style.height = "100%";
-    fill.style.background = "#111";
-    fill.style.transition = "width 0.05s linear";
-
-    track.appendChild(fill);
-    slideshowImage.insertAdjacentElement("afterend", track);
-
-    var progress = 0;
-    var tickMs = 50;
-    var step = 100 / (IMAGE_DURATION / tickMs);
-
-    setInterval(function() {
-      progress = Math.min(progress + step, 100);
-      fill.style.width = progress + "%";
-    }, tickMs);
-
-    var observer = new MutationObserver(function() {
-      progress = 0;
+      var fill = document.createElement("div");
+      fill.id = "slideshowProgressFill";
       fill.style.width = "0%";
-    });
+      fill.style.height = "100%";
+      fill.style.background = "#111";
+      fill.style.transition = "width 0.05s linear";
 
-    observer.observe(slideshowImage, {
-      attributes: true,
-      attributeFilter: ["src"]
-    });
+      track.appendChild(fill);
+      slideshowImage.insertAdjacentElement("afterend", track);
+
+      var progress = 0;
+      var tickMs = 50;
+      var step = 100 / (IMAGE_DURATION / tickMs);
+
+      setInterval(function () {
+        progress = Math.min(progress + step, 100);
+        fill.style.width = progress + "%";
+      }, tickMs);
+
+      var observer = new MutationObserver(function () {
+        progress = 0;
+        fill.style.width = "0%";
+      });
+
+      observer.observe(slideshowImage, {
+        attributes: true,
+        attributeFilter: ["src"],
+      });
+    }
+
+    // auto-advance slideshow
+    let i = 0;
+    const slide = document.getElementById("slide");
+
+    function showNextImage() {
+      i = (i + 1) % images.length;
+      slide.src = images[i];
+      slide.alt = altTexts[i];
+    }
+    setInterval(showNextImage, IMAGE_DURATION);
   }
-
-  // auto-advance slideshow
-  let i = 0;
-  const slide = document.getElementById("slide");
-
-  function showNextImage() {
-    i = (i + 1) % images.length;
-    slide.src = images[i];
-    slide.alt = altTexts[i];
-  }
-  setInterval(showNextImage, IMAGE_DURATION);
 
   // load page elements
   buildNav();
@@ -407,4 +440,4 @@ document.addEventListener("DOMContentLoaded", function() {
   greeting(new Date().getHours());
   addYear();
   loadGoogleMaps();
-}); 
+});
